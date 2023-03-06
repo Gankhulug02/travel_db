@@ -7,7 +7,7 @@
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
-SET FOREIGN_KEY_CHECKS=0;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `travel` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Truncate table before insert `travel`
+Truncate table before insert `travel`
 --
 
 TRUNCATE TABLE `travel`;
