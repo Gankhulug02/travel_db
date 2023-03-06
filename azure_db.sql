@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 06, 2023 at 08:24 AM
+-- Generation Time: Mar 06, 2023 at 10:18 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -38,6 +39,11 @@ CREATE TABLE IF NOT EXISTS `azure_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Truncate table before insert `azure_user`
+--
+
+TRUNCATE TABLE `azure_user`;
+--
 -- Dumping data for table `azure_user`
 --
 
@@ -58,20 +64,24 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `images` text DEFAULT NULL,
-  `detail` text DEFAULT NULL,
-  `price` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Truncate table before insert `categories`
+--
+
+TRUNCATE TABLE `categories`;
+--
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `title`, `images`, `detail`, `price`) VALUES
-(1, 'Bali', 'IRL', 'BALI', '200'),
-(2, 'HONG KONG', 'URL', 'HONG KONG', '333'),
-(3, 'USA', 'URL', 'USA', '999'),
-(4, 'EUROPE', 'URL', 'Traveling in Europe offers a wide range of experiences from historic cities to breathtaking natural wonders. Visitors can explore world-renowned museums and art galleries, indulge in delicious cuisine, and immerse themselves in diverse cultures. Efficient transportation options make it easy to navigate the continent and visit multiple countries in one trip.', '333');
+INSERT INTO `categories` (`id`, `title`, `images`, `description`) VALUES
+(1, 'Asia', 'URL', '.'),
+(2, 'Africa', 'URL', '.'),
+(3, 'America', 'URL', '.'),
+(4, 'Europe', 'URL', '.');
 
 -- --------------------------------------------------------
 
@@ -92,6 +102,11 @@ CREATE TABLE IF NOT EXISTS `rating` (
   KEY `tra_id` (`tra_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncate table before insert `rating`
+--
+
+TRUNCATE TABLE `rating`;
 --
 -- Dumping data for table `rating`
 --
@@ -122,13 +137,18 @@ CREATE TABLE IF NOT EXISTS `travel` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Truncate table before insert `travel`
+--
+
+TRUNCATE TABLE `travel`;
+--
 -- Dumping data for table `travel`
 --
 
 INSERT INTO `travel` (`id`, `title`, `images`, `detail`, `price`, `cat_id`, `location`, `day`) VALUES
-(1, 'Bali', 'URL', 'Traveling to Bali offers visitors a chance to experience a unique blend of culture, history, and natural beauty. The island is known for its stunning beaches, lush rice paddies, and iconic temples. Visitors can indulge in delicious cuisine, explore traditional markets, and participate in cultural ceremonies and festivities.', 999, 1, 'BALI', 2),
-(2, 'HONG KONG', 'https://images.unsplash.com/photo-1533029030467-904d7bbd602b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2969&q=80', 'Traveling to Hong Kong offers a vibrant mix of culture, history, and modernity. Visitors can explore the city\'s iconic skyscrapers, indulge in delicious Cantonese cuisine, and immerse themselves in the local markets and shopping districts. The city also offers stunning natural scenery, including Victoria Peak and the surrounding islands.', 444, 2, 'HONG KONG', 3),
-(3, 'USA, WA', 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8VVNBfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60', 'Traveling to the state of Washington in the USA offers a variety of activities and experiences. Known for its natural beauty, visitors can explore the Olympic National Park, Mount Rainier, and the San Juan Islands. Seattle offers a vibrant city experience with its iconic Space Needle, Pike Place Market, and diverse food scene.', 999, 3, 'USA', 5),
+(1, 'Bali', 'https://images.unsplash.com/photo-1533029030467-904d7bbd602b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2969&q=80', 'Traveling to Bali offers visitors a chance to experience a unique blend of culture, history, and natural beauty. The island is known for its stunning beaches, lush rice paddies, and iconic temples. Visitors can indulge in delicious cuisine, explore traditional markets, and participate in cultural ceremonies and festivities.', 999, 1, 'BALI', 2),
+(2, 'HONG KONG', 'https://images.unsplash.com/photo-1533029030467-904d7bbd602b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2969&q=80', 'Traveling to Hong Kong offers a vibrant mix of culture, history, and modernity. Visitors can explore the city\'s iconic skyscrapers, indulge in delicious Cantonese cuisine, and immerse themselves in the local markets and shopping districts. The city also offers stunning natural scenery, including Victoria Peak and the surrounding islands.', 420, 2, 'HONG KONG', 3),
+(3, 'USA, WA', 'https://images.unsplash.com/photo-1485738422979-f5c462d49f74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8VVNBfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60', 'Traveling to the state of Washington in the USA offers a variety of activities and experiences. Known for its natural beauty, visitors can explore the Olympic National Park, Mount Rainier, and the San Juan Islands. Seattle offers a vibrant city experience with its iconic Space Needle, Pike Place Market, and diverse food scene.', 900, 3, 'USA', 5),
 (4, 'Switzerland', 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2970&q=80', 'Traveling to Switzerland offers visitors a chance to explore stunning alpine landscapes, quaint villages, and world-renowned cities. The country is known for its skiing and hiking opportunities, as well as its delicious chocolate and cheese. Visitors can also explore historic landmarks such as the Matterhorn and the Swiss Alps Jungfrau-Aletsch UNESCO World Heritage Site.', 247, 4, 'EU, Switzerland', 999),
 (5, 'Paris', 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2973&q=80', 'Traveling to Paris offers a romantic and iconic experience with its charming streets, stunning architecture, and world-renowned landmarks such as the Eiffel Tower and Notre Dame Cathedral. Visitors can indulge in delicious French cuisine, explore art museums such as the Louvre, and shop in high-end boutiques along the Champs-Élysées.', 420, 4, 'EU, Paris', 7);
 
@@ -148,6 +168,11 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Truncate table before insert `user`
+--
+
+TRUNCATE TABLE `user`;
 --
 -- Dumping data for table `user`
 --
@@ -175,6 +200,7 @@ ALTER TABLE `rating`
 --
 ALTER TABLE `travel`
   ADD CONSTRAINT `travel_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `categories` (`id`);
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
