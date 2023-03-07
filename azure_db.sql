@@ -3,10 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 06, 2023 at 10:18 AM
+-- Generation Time: Mar 07, 2023 at 06:24 AM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
-
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -23,35 +22,6 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `azure_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `azure_db`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `azure_user`
---
-
-DROP TABLE IF EXISTS `azure_user`;
-CREATE TABLE IF NOT EXISTS `azure_user` (
-  `aid` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `ovog` varchar(50) NOT NULL,
-  PRIMARY KEY (`aid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Truncate table before insert `azure_user`
---
-
-TRUNCATE TABLE `azure_user`;
---
--- Dumping data for table `azure_user`
---
-
-INSERT INTO `azure_user` (`aid`, `name`, `ovog`) VALUES
-(1, 'asd', 'qwe'),
-(2, 'asd', 'qwe'),
-(3, 'asd', 'qwe'),
-(4, 'rrr', 'wwww');
 
 -- --------------------------------------------------------
 
@@ -137,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `travel` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
-Truncate table before insert `travel`
+-- Truncate table before insert `travel`
 --
 
 TRUNCATE TABLE `travel`;
@@ -200,7 +170,6 @@ ALTER TABLE `rating`
 --
 ALTER TABLE `travel`
   ADD CONSTRAINT `travel_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `categories` (`id`);
-SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
