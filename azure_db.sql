@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 07, 2023 at 06:24 AM
+-- Generation Time: Mar 09, 2023 at 10:38 AM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -22,6 +22,59 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `azure_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `azure_db`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `agent`
+--
+
+DROP TABLE IF EXISTS `agent`;
+CREATE TABLE IF NOT EXISTS `agent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(255) NOT NULL,
+  `agent_name` varchar(100) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` text DEFAULT NULL,
+  `role` enum('USER','ADMIN') DEFAULT 'USER',
+  `phone_number` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Truncate table before insert `agent`
+--
+
+TRUNCATE TABLE `agent`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `azure_user`
+--
+
+DROP TABLE IF EXISTS `azure_user`;
+CREATE TABLE IF NOT EXISTS `azure_user` (
+  `aid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `ovog` varchar(50) NOT NULL,
+  PRIMARY KEY (`aid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Truncate table before insert `azure_user`
+--
+
+TRUNCATE TABLE `azure_user`;
+--
+-- Dumping data for table `azure_user`
+--
+
+INSERT INTO `azure_user` (`aid`, `name`, `ovog`) VALUES
+(1, 'asd', 'qwe'),
+(2, 'asd', 'qwe'),
+(3, 'asd', 'qwe'),
+(4, 'rrr', 'wwww');
 
 -- --------------------------------------------------------
 
@@ -56,6 +109,29 @@ INSERT INTO `categories` (`id`, `title`, `images`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE IF NOT EXISTS `order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `payment_id` int(11) DEFAULT NULL,
+  `list_id` int(11) DEFAULT NULL,
+  `order_type` varchar(255) NOT NULL,
+  `status` enum('CANCEL','PENDING','APPROVED') DEFAULT NULL,
+  `order_date` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `list_id` (`list_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Truncate table before insert `order`
+--
+
+TRUNCATE TABLE `order`;
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rating`
 --
 
@@ -77,15 +153,6 @@ CREATE TABLE IF NOT EXISTS `rating` (
 --
 
 TRUNCATE TABLE `rating`;
---
--- Dumping data for table `rating`
---
-
-INSERT INTO `rating` (`rate_id`, `user_id`, `cat_id`, `tra_id`, `rating`) VALUES
-(1, '0f526f5c-7bec-4153-b7ed-828a4403e49b', 1, 1, 5),
-(2, '98132f40-c3d0-4d82-87c0-659a2651d0cd', 1, 1, 5),
-(3, 'c259e94a-7a31-4d49-8714-0264a0531708', 1, 2, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -125,18 +192,44 @@ INSERT INTO `travel` (`id`, `title`, `images`, `detail`, `price`, `cat_id`, `loc
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `travel_list`
+--
+
+DROP TABLE IF EXISTS `travel_list`;
+CREATE TABLE IF NOT EXISTS `travel_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `travel_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `adult` int(11) DEFAULT NULL,
+  `child` int(11) DEFAULT NULL,
+  `total` float DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `travel_id` (`travel_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Truncate table before insert `travel_list`
+--
+
+TRUNCATE TABLE `travel_list`;
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `user_id` varchar(100) NOT NULL,
   `name` varchar(50) NOT NULL,
   `role` varchar(10) DEFAULT 'user',
   `email` varchar(100) NOT NULL,
   `password` text NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `phone_number` text NOT NULL,
+  `profile_img` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Truncate table before insert `user`
@@ -147,29 +240,40 @@ TRUNCATE TABLE `user`;
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `name`, `role`, `email`, `password`) VALUES
-('0f526f5c-7bec-4153-b7ed-828a4403e49b', 'namsrai', 'user', 'namsrai.yo@gmail.com', '$2b$10$dkkfkZ0L3HD8RpP/Ln6v8OH9WP1DJOpp2VfDgu4n71XtYyWsmoTna'),
-('98132f40-c3d0-4d82-87c0-659a2651d0cd', 'Уртнасан', 'user', '@gmail.com', '$2b$10$Hj0VvN6UWy75zDcmUq30dOrTj.Y/fd0l092JwBmkydYFlLVZx0GVq'),
-('c259e94a-7a31-4d49-8714-0264a0531708', 'Gankhulug', 'user', 'Huluguu0202@gmail.com', '$2b$10$aSt2h9quZEJEQLBvUJWkh.yi0hWjn4B97GIDL.hpxT5GDSXx.GYCe'),
-('daec7716-61f6-402c-bbdb-5342f7267fb8', 'ganaa', 'user', 'Ganaa@gmail.com', '$2b$10$XNvvUjVs.KPeLV.G1hPOB.5O0ph1axi9FzN82AaI0NmOLK15TyuTe');
+INSERT INTO `user` (`name`, `role`, `email`, `password`, `id`, `phone_number`, `profile_img`) VALUES
+('999999', 'user', 'ganaa', '$2b$10$y/eXTVsT6sH0zmqvwR9gNuAUdVf9vC0KZdtCMXpsrBzhy/Yn0pIwq', 1, 'ganaa@gmail.com', 'url'),
+('ganaaa', NULL, 'ganaaa@gmail.com', '$2b$10$Py7Qpy9FnpfB2pHuPUH6eOUq.zU48jSULiuZ99uPKYsLo1eWEEXHG', 2, '88888', 'url'),
+('ganaaqa', 'user', 'ganaaqa@gmail.com', '$2b$10$QP/l4BmuIfOQ4ZCArvl5kuLVZxo8c0a7WsZUjo/bIHNj6kXVowDXK', 3, '88888', 'url');
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`list_id`) REFERENCES `travel_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `rating`
 --
 ALTER TABLE `rating`
-  ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`cat_id`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `rating_ibfk_3` FOREIGN KEY (`tra_id`) REFERENCES `travel` (`id`);
+  ADD CONSTRAINT `rating_ibfk_5` FOREIGN KEY (`tra_id`) REFERENCES `travel` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rating_ibfk_6` FOREIGN KEY (`tra_id`) REFERENCES `travel` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `travel`
 --
 ALTER TABLE `travel`
   ADD CONSTRAINT `travel_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `categories` (`id`);
+
+--
+-- Constraints for table `travel_list`
+--
+ALTER TABLE `travel_list`
+  ADD CONSTRAINT `travel_list_ibfk_1` FOREIGN KEY (`travel_id`) REFERENCES `travel` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `travel_list_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
