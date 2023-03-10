@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 09, 2023 at 10:38 AM
+-- Generation Time: Mar 10, 2023 at 06:30 AM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,35 +47,6 @@ CREATE TABLE IF NOT EXISTS `agent` (
 --
 
 TRUNCATE TABLE `agent`;
--- --------------------------------------------------------
-
---
--- Table structure for table `azure_user`
---
-
-DROP TABLE IF EXISTS `azure_user`;
-CREATE TABLE IF NOT EXISTS `azure_user` (
-  `aid` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `ovog` varchar(50) NOT NULL,
-  PRIMARY KEY (`aid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Truncate table before insert `azure_user`
---
-
-TRUNCATE TABLE `azure_user`;
---
--- Dumping data for table `azure_user`
---
-
-INSERT INTO `azure_user` (`aid`, `name`, `ovog`) VALUES
-(1, 'asd', 'qwe'),
-(2, 'asd', 'qwe'),
-(3, 'asd', 'qwe'),
-(4, 'rrr', 'wwww');
-
 -- --------------------------------------------------------
 
 --
@@ -146,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `rating` (
   KEY `user_id` (`user_id`),
   KEY `cat_id` (`cat_id`),
   KEY `tra_id` (`tra_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Truncate table before insert `rating`
@@ -243,7 +214,8 @@ TRUNCATE TABLE `user`;
 INSERT INTO `user` (`name`, `role`, `email`, `password`, `id`, `phone_number`, `profile_img`) VALUES
 ('999999', 'user', 'ganaa', '$2b$10$y/eXTVsT6sH0zmqvwR9gNuAUdVf9vC0KZdtCMXpsrBzhy/Yn0pIwq', 1, 'ganaa@gmail.com', 'url'),
 ('ganaaa', NULL, 'ganaaa@gmail.com', '$2b$10$Py7Qpy9FnpfB2pHuPUH6eOUq.zU48jSULiuZ99uPKYsLo1eWEEXHG', 2, '88888', 'url'),
-('ganaaqa', 'user', 'ganaaqa@gmail.com', '$2b$10$QP/l4BmuIfOQ4ZCArvl5kuLVZxo8c0a7WsZUjo/bIHNj6kXVowDXK', 3, '88888', 'url');
+('ganaaqa', 'user', 'ganaaqa@gmail.com', '$2b$10$QP/l4BmuIfOQ4ZCArvl5kuLVZxo8c0a7WsZUjo/bIHNj6kXVowDXK', 3, '88888', 'url'),
+('hello', 'user', 'asd@gmail.com', '$2b$10$N1e3OjytIbVHxfFcD1XoD.jbtQoxmURiDSAAHvjLnDEXp8wHHdw1S', 4, '88228822', 'url');
 
 --
 -- Constraints for dumped tables
