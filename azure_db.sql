@@ -1,3 +1,4 @@
+-- Active: 1677660477547@@127.0.0.1@3306@azure_db
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
@@ -192,11 +193,11 @@ TRUNCATE TABLE `travel_list`;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL UNIQUE AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `role` varchar(10) DEFAULT 'user',
   `email` varchar(100) NOT NULL,
   `password` text NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `phone_number` text NOT NULL,
   `profile_img` text NOT NULL,
   PRIMARY KEY (`id`)
